@@ -32,16 +32,6 @@ class Ball {
 		let flagX = true;
 		let flagY = true;
 		let flag = true;
-		/* 
-			Below is the map borders code that makes the ball bounce back
-			after wall collisions.
-		*/
-
-
-		/* 
-			Above is the map borders code that makes the ball bounce back
-			after wall collisions.
-		*/
 
 		if (this.pos.x + dx + this.radius >= x + 1 && this.vel.x >= 0 && board[y][x+1] !== 0 && board[y] != undefined) {
 			this.vel.x *= -1;
@@ -72,7 +62,7 @@ class Ball {
 			this.vel.y *= -1;
 			this.pos.y += dy;
 			flag = false;
-		} else if (flagY) {
+		} else {
 			this.pos.y += dy;
 		}
 		// Corner code;	
@@ -107,15 +97,12 @@ class Ball {
 		}
 		// Corner code;	
 
-		//this.pos.y += this.vel.y * time;
 		this.vel = this.vel.multiply(speedDecayRate);
 	}
 	intersectsRectangle(rectPos) {
 		const disX = Math.abs(this.pos.x - rectPos.x);
 		const disY = Math.abs(this.pos.y - rectPos.y);
-		//if (disX > scale/2 + this.radius) return false;
-		//if (disY > scale/2 + this.radius) return false;
-
+		
 		let cornerDistanceSquared = (disX - scale / 2) ** 2 + (disY - scale / 2) ** 2;
 
 		return (cornerDistanceSquared <= this.radius ** 2);
@@ -155,23 +142,10 @@ class Ball {
 		const unitTangent = new Vector2D(-unitNormal.y, unitNormal.x);
 
 		// Sets up the two vector axises
-		//const totalMass = this.mass + ballB.mass;
-
 		const v1n = unitNormal.dot(this.vel);
 		const v1t = unitTangent.dot(this.vel);
-		//const v2n = unitNormal.dot(ballB.vel);
-		//const v2t = unitTangent.dot(ballB.vel);
-
-		//const v1nDelta = (v1n * (this.mass - ballB.mass) + 2 * ballB.mass * v2n) / totalMass;
-		//const v2nDelta = (v2n * (ballB.mass - this.mass) + 2 * this.mass * v1n) / totalMass;
-
-
+		
 		this.vel = unitNormal.multiply(-v1n);
 		this.vel.add(unitTangent.multiply(v1t));
-
-		//ballB.vel = unitNormal.multiply(v2nDelta);
-		//this.vel.add(unitTangent.multiply(v2t));
-
-
 	}
 }
