@@ -9,8 +9,8 @@ const lossyPercentage = 0.99;
 const airResistance = 0.5; 
 const min = 0.1;
 const strikePower = 3;
-const width = 10//canvas.width/scale;
-const height = 10//canvas.width/scale;
+const width = 10;
+const height = 10;
 const scale = canvas.width/width;
 
 var timeSinceCall = 0;
@@ -34,13 +34,7 @@ board = [
     [0,0,0,0,0,0,0,0,0,0],
     [1,1,1,1,1,1,1,1,1,1]
 ];
-// for (let row = 0; row < height; row++) {
-//     board[row] = [];
-//     for (let col = 0; col < width; col++) {
-//         board[row][col] = Math.floor(Math.random()*10);
-//         board[row][col] = board[row][col] > 1 ? 0 : 1;
-//     }
-// }
+
 // Data:
 
 function distanceSquared(pos1, pos2) {
@@ -56,19 +50,14 @@ function main(time = 0) {
         c.fillRect(0, 0, canvas.width, canvas.height);
 
         c.fillStyle = 'black'
-        let k = 0;
         for (let row = 0; row < height; row++) {
             for (let col = 0; col < width; col++) {
-                //if (board[row][col] != 0) {
-                    switch (board[row][col]) {
-                        case 0: c.fillStyle = (row%2 + col%2)%2 == 0 ? '#7CB342' : '#8BC34A'; break;
-                        case 1: c.fillStyle = 'black'; break
-                        case 2: c.fillStyle = 'yellow'; break
-                    }
-                    c.fillRect(col*scale, canvas.width- (row+1)*scale,scale,scale)
-                //}
-                
-                k++
+                switch (board[row][col]) {
+                    case 0: c.fillStyle = (row%2 + col%2)%2 == 0 ? '#7CB342' : '#8BC34A'; break;
+                    case 1: c.fillStyle = 'black'; break
+                    case 2: c.fillStyle = 'yellow'; break
+                }
+                c.fillRect(col*scale, canvas.width- (row+1)*scale,scale,scale)
             }
         }
 
